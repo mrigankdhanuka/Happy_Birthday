@@ -13,15 +13,15 @@ import {
 } from "lucide-react";
 
 const cakeImages = [
-  "../assets/15.jpg",
-  "../assets/11.jpg",
-  "../assets/12.jpg",
-  "../assets/13.jpg",
-  "../assets/14.jpg",
-  "../assets/15.jpg",
-  "../assets/12.jpg",
-  "../assets/13.jpg",
-  "../assets/14.jpg",
+  "/assets/15.jpg",
+  "/assets/11.jpg",
+  "/assets/12.jpg",
+  "/assets/13.jpg",
+  "/assets/14.jpg",
+  "/assets/15.jpg",
+  "/assets/12.jpg",
+  "/assets/13.jpg",
+  "/assets/14.jpg",
 ];
 
 function App() {
@@ -84,7 +84,7 @@ function App() {
       <audio
         ref={audioRef}
         // src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.wav"
-        src="./audio/Garvit.mp3"
+        src="/assets/audio/Garvit.mp3"
         preload="auto"
         onEnded={() => setIsPlaying(false)}
         onError={() => setAudioError(true)}
