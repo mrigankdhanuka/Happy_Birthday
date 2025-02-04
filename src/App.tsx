@@ -124,7 +124,7 @@ function App() {
             {/* Name and Icons */}
             <div className="text-center">
               <h1 className="text-6xl md:text-7xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 animate-pulse">
-                Happy Birthday Alex!
+                Happy Birthday Garvit!
               </h1>
               <div className="flex justify-center gap-4 mb-8">
                 <Cake className="w-8 h-8 text-pink-500 animate-bounce" />
