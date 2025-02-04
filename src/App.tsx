@@ -1,10 +1,27 @@
-import React, { useState, useRef } from 'react';
-import { Cake, Gift, PartyPopper, Sparkles, Moon as Balloon, PartyPopper as Party, Stars, SettingsIcon as Confetti, Volume2, VolumeX } from 'lucide-react';
+import React, { useState, useRef } from "react";
+import {
+  Cake,
+  Gift,
+  PartyPopper,
+  Sparkles,
+  Moon as Balloon,
+  PartyPopper as Party,
+  Stars,
+  SettingsIcon as Confetti,
+  Volume2,
+  VolumeX,
+} from "lucide-react";
 
 const cakeImages = [
-  'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1562777717-dc6984f65a63?auto=format&fit=crop&w=800&q=80',
-  'https://images.unsplash.com/photo-1535141192574-5d4897c12636?auto=format&fit=crop&w=800&q=80',
+  "../assets/15.jpg",
+  "../assets/11.jpg",
+  "../assets/12.jpg",
+  "../assets/13.jpg",
+  "../assets/14.jpg",
+  "../assets/15.jpg",
+  "../assets/12.jpg",
+  "../assets/13.jpg",
+  "../assets/14.jpg",
 ];
 
 function App() {
@@ -33,12 +50,15 @@ function App() {
   const playBirthdaySong = () => {
     if (audioRef.current) {
       audioRef.current.currentTime = 0;
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch((error) => {
-        console.error('Audio playback failed:', error);
-        setAudioError(true);
-      });
+      audioRef.current
+        .play()
+        .then(() => {
+          setIsPlaying(true);
+        })
+        .catch((error) => {
+          console.error("Audio playback failed:", error);
+          setAudioError(true);
+        });
     }
   };
 
@@ -113,7 +133,7 @@ function App() {
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 animate-spin-slow blur-xl opacity-75"></div>
               <div className="relative w-full h-full rounded-full overflow-hidden border-8 border-white shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=400&h=400&q=80"
+                  src="../assets/16.jpg"
                   alt="Birthday boy"
                   className="w-full h-full object-cover"
                 />
@@ -133,16 +153,15 @@ function App() {
               </div>
             </div>
           </div>
-
           {/* Message Section */}
           <div className="bg-white bg-opacity-80 rounded-xl p-8 mb-12 shadow-xl transform hover:scale-105 transition-transform duration-300">
             <p className="text-2xl text-gray-800 leading-relaxed">
-              Wishing you endless joy, laughter, and love on your special day. Have a blast! 🎂🎉
+              Wishing you endless joy, laughter, and love on your special day.
+              Have a blast! 🎂🎉
             </p>
           </div>
-
           {/* Rotating Images Section */}
-          <div className="mb-12">
+          {/* {showSurprise && <div className="mb-12">
             <div className="relative w-full h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl">
               <img
                 src={cakeImages[currentImageIndex]}
@@ -150,12 +169,45 @@ function App() {
                 className="w-full h-full object-cover transition-opacity duration-500"
               />
             </div>
-          </div>
-
+          </div>} */}
+          {showSurprise && (
+            <div className="mb-12">
+              <div className="relative w-full  rounded-xl overflow-hidden shadow-2xl bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-500 p-2">
+                <div className="absolute inset-0 flex items-center justify-between px-4">
+                  <div className="text-white text-3xl font-bold">Surprise!</div>
+                  <div className="text-white text-xl animate-pulse">
+                    Enjoy the celebration!
+                  </div>
+                </div>
+                <div className="slider-container relative">
+                  <div
+                    className="slider-wrapper flex gap-2 transition-transform duration-1000 ease-in-out "
+                    style={{
+                      transform: `translateX(-${currentImageIndex * 30}%)`,
+                    }}
+                  >
+                    {cakeImages.map((image, index) => (
+                      <div
+                        key={index}
+                        className="slider-item relative w-[32%] aspect-square flex-shrink-0 overflow-hidden rounded-xl"
+                      >
+                        <img
+                          src={image}
+                          alt="Birthday celebration"
+                          className="w-full h-full object-cover rounded-xl shadow-lg hover:scale-105 transform transition-all duration-300"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black opacity-30"></div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           {/* Surprise Button Section */}
-          <div className="relative">
-            <div className="flex flex-col items-center gap-4">
-              <div className="flex items-center gap-3">
+          <div className={`relative `}>
+            <div className="flex flex-col items-center justify-start">
+              <div className="flex items-center gap-4">
                 <button
                   onClick={handleSurpriseClick}
                   className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xl font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
@@ -164,10 +216,10 @@ function App() {
                 </button>
                 {!audioError && (
                   <div
-                    onClick={toggleAudio}
+                    onClick={handleSurpriseClick}
                     className="cursor-pointer p-2 rounded-full hover:bg-purple-500/20 transition-colors"
                   >
-                    {isPlaying ? (
+                    {!isPlaying ? (
                       <VolumeX className="w-6 h-6 text-purple-500" />
                     ) : (
                       <Volume2 className="w-6 h-6 text-purple-500" />
@@ -183,15 +235,15 @@ function App() {
               )}
             </div>
 
-            {showSurprise && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-4 p-6 bg-white rounded-xl shadow-2xl animate-fadeIn">
+            {/* {showSurprise && (
+              <div className="absolute top-full left-1/2  -translate-x-4 mt-4 p-6 bg-white rounded-xl shadow-2xl animate-fadeIn">
                 <p className="text-xl text-gray-800">
                   🎉 Here's your special surprise! 🎁
                   <br />
                   May your day be filled with wonderful moments and sweet surprises!
                 </p>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
